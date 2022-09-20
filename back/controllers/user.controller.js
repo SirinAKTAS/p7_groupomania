@@ -9,7 +9,7 @@
  require('dotenv').config();
  const fs = require('fs');
  const ObjectID = require('mongoose').Types.ObjectId;
-
+ const { signUpErrors } = require('../utils/errors.utils');
 
 // ************************************************ AUTH *********************************************************************
 
@@ -28,7 +28,10 @@ exports.signup = (req, res, next) => {
         });
         user.save()
           .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-          .catch(error => res.status(400).json({ error }));
+          .catch((error) =>{
+            const errors = signUpErrors(error);
+            res.status(400).json({ errors })
+          });
       })
       .catch(error => res.status(500).json({ error }));
 };
@@ -38,8 +41,13 @@ exports.signup = (req, res, next) => {
  * Utilisation de .compare grâce à l'import de bcrypt qui permet ici de comparer le mdp du body et celui de la BDD
  * Lors de la connection on obtien l'userId + un Token qui a été noté dans le .env + un délai du token de 24h
  */
+const maxAge = 3 * 24 * 60 * 60 * 1000;
+const createToken = (id) => {
+    return jwt.sign({id}, process.env.TOKEN_KEY, {
+        expiresIn: maxAge
+    })
+}
 exports.login = (req, res, next) => {
-    const maxAge = 3 * 24 * 60 * 60 * 1000;
     User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
@@ -50,7 +58,8 @@ exports.login = (req, res, next) => {
                     if (!valid) {
                         return res.status(401).json({ error: 'Email/Mot de passe incorrect !' });
                     }
-                    res.cookie('jwt', { httpOnly: true, maxAge: maxAge});
+                    const token = createToken(user._id);
+                    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge});
                     res.status(200).json({
                         userId: user._id,
                         token: jwt.sign(
@@ -61,6 +70,7 @@ exports.login = (req, res, next) => {
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
+        
         })
         .catch(error => res.status(500).json({ error }));
 };

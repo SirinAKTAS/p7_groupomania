@@ -9,21 +9,23 @@ const userSchema = mongoose.Schema(
             type: String, 
             required: true, 
             trim: true,
-            minLength: 3,
-            maxLength: 55,
-            unique: true
+            minlength: 3,
+            max: 55,
+            unique: true,
+            lowercase: true
         },  
         email: { 
             type: String,
             required: true, 
             unique: true, 
-            trim: true 
+            trim: true,
+            lowercase: true 
         },
         password: { 
             type: String, 
             required: true,
-            minLength: 6,
-            maxLength: 1024 
+            minlength: 6,
+            max: 1024 
         },
         picture: {
             type: String,
@@ -31,7 +33,7 @@ const userSchema = mongoose.Schema(
         },
         bio: {
             type: String,
-            maxLength: 1024
+            max: 1024
         },
     },
     {
