@@ -6,6 +6,7 @@ const path = require('path');
 require('dotenv').config();
 
 const userRoutes = require('./routes/user.routes');
+const postRoutes = require('./routes/post.routes');
 
 
 // Fonction .connect pour lier notre BDD à notre serveur
@@ -31,5 +32,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
 
 module.exports = app;
