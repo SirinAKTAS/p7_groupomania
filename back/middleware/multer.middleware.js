@@ -1,4 +1,3 @@
-// Import de multer pour gérer les images
 const multer = require('multer');
 
 const MIME_TYPES = {

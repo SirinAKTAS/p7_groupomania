@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
+const multer = require('../middleware/multer.middleware');
 const postCtrl = require('../controllers/post.controller');
 
 // Post
 router.get('/', postCtrl.readPost);
-router.post('/', postCtrl.createPost);
+router.post('/', multer, postCtrl.createPost);
 router.put('/:id', postCtrl.modifyPost);
 router.delete('/:id', postCtrl.deletePost);
 router.patch('/like/:id', postCtrl.likePost);
