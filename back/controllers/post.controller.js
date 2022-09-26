@@ -1,6 +1,7 @@
 const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectID = require("mongoose").Types.ObjectId;
+const fs = require('fs');
 
 // Affichage des post
 exports.readPost = (req, res, next) => {
@@ -35,6 +36,7 @@ exports.modifyPost = (req, res, next) => {
 
   const updatedRecord = {
     message: req.body.message,
+    pictureUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
   };
 
   PostModel.findByIdAndUpdate(
@@ -52,11 +54,14 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-
-  PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
-    if (!err) res.send("Post deleted");
-    else console.log("Delete error : " + err);
-  });
+  
+  const filename = PostModel.pictureUrl.split('/images/')[1];
+  fs.unlink(`images/${filename}`, () => {
+    PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
+      if (!err) res.send("Post deleted");
+      else console.log("Delete error : " + err);
+    })
+  })
 };
 
 // ***************************** SYSTEME DE LIKE / UNLIKE ********************************
