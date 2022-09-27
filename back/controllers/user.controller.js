@@ -9,7 +9,7 @@
  require('dotenv').config();
  const fs = require('fs');
  const ObjectID = require('mongoose').Types.ObjectId;
- const { signUpErrors } = require('../utils/errors.utils');
+ const { signUpErrors, signInErrors } = require('../utils/errors.utils');
 
 // ************************************************ AUTH *********************************************************************
 
@@ -69,7 +69,10 @@ exports.login = (req, res, next) => {
                         )
                     });
                 })
-                .catch(error => res.status(500).json({ error }));
+                .catch((error) => {
+                    const errors = signInErrors(error);
+                    res.status(500).json({ errors })
+                });
         
         })
         .catch(error => res.status(500).json({ error }));

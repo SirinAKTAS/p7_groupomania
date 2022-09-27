@@ -12,3 +12,15 @@ module.exports.signUpErrors = (error) => {
 
     return errors;
 };
+
+module.exports.signInErrors = (error) => {
+    let errors = { email: "", password: "" };
+
+    if (error.message.includes('email'))
+        errors.email = "Email incorrect ou inconnu";
+
+    if (error.message.includes('password'))
+        errors.password = "Mot de passe incorrect ou trop court";
+
+    return errors;
+};
