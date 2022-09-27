@@ -1,5 +1,16 @@
+import {Routes, Route} from "react-router-dom";
+import Home from "./components/Home/Home";
+import Profil from "./components/Profil/Profil";
+
 function App() {
-  return <h1 className="text-3xl text-primary font-bold">Hello world!</h1>;
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profil" element={<Profil />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
