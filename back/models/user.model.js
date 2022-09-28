@@ -1,6 +1,7 @@
 // Import d'une fonction de mongoose (unique-validator) pour rendre un élement unique
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
+const bcrypt = require('bcrypt');
 
 // Schema de l'utilisateur qui sera envoyé dans la BDD
 const userSchema = mongoose.Schema(
@@ -43,6 +44,18 @@ const userSchema = mongoose.Schema(
         timestamps: true
     }
 );
+
+userSchema.statics.login = async function(email, password) {
+    const user = await this.findOne({ email });
+    if (user) {
+      const auth = await bcrypt.compare(password, user.password);
+      if (auth) {
+        return user;
+      }
+      throw Error('incorrect password');
+    }
+    throw Error('incorrect email')
+  };
 
 userSchema.plugin(uniqueValidator);
 

@@ -11,7 +11,7 @@ const SignInForm = () => {
     const passwordError = document.getElementById('passwordError');
 
     axios({
-        method: "post",
+        method: "POST",
         url: `${process.env.REACT_APP_API_URL}api/user/login`,
         data: {
             email,
@@ -19,11 +19,12 @@ const SignInForm = () => {
         },
     })
     .then((res) => {
-        if (res.data.error) {
-            emailError.innerHTML = res.data.error;
-            passwordError.innerHTML = res.data.error;
+      console.log(res)
+        if (res.data.errors) {
+            emailError.innerHTML = res.data.errors.email;
+            passwordError.innerHTML = res.data.errors.password;
         } else {
-            window.location ="/";
+            window.location = "/feed";
         }
     })
     .catch ((err) => {

@@ -29,9 +29,11 @@ const Log = () => {
                     </nav>
                 </div>
             </header>
-            <div className="bg-white flex justify-center m-12 px-12 pt-8 pb-4 rounded-2xl">
-                {signUpModal && <SignUpForm />}
-                {signInModal && <SignInForm />}
+            <div className="flex justify-center items-center">
+                <div className="bg-white m-12 px-12 pt-8 pb-4 rounded-2xl">
+                    {signUpModal && <SignUpForm />}
+                    {signInModal && <SignInForm />}
+                </div>
             </div>
         </>
     );

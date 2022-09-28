@@ -47,35 +47,18 @@ const createToken = (id) => {
         expiresIn: maxAge
     })
 }
-exports.login = (req, res, next) => {
-    User.findOne({ email: req.body.email })
-        .then(user => {
-            if (!user) {
-                return res.status(401).json({ error: 'Email/Mot de passe incorrect !' });
-            }
-            bcrypt.compare(req.body.password, user.password)
-                .then(valid => {
-                    if (!valid) {
-                        return res.status(401).json({ error: 'Email/Mot de passe incorrect !' });
-                    }
-                    const token = createToken(user._id);
-                    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge});
-                    res.status(200).json({
-                        userId: user._id,
-                        token: jwt.sign(
-                            { userId: user._id },
-                            process.env.TOKEN_KEY,
-                            { expiresIn: '24h' }
-                        )
-                    });
-                })
-                .catch((error) => {
-                    const errors = signInErrors(error);
-                    res.status(500).json({ errors })
-                });
-        
-        })
-        .catch(error => res.status(500).json({ error }));
+exports.login = async (req, res, next) => {
+    const { email, password } = req.body
+
+    try {
+      const user = await User.login(email, password);
+      const token = createToken(user._id);
+      res.cookie('jwt', token, { httpOnly: true, maxAge});
+      res.status(200).json({ user: user._id, token})
+    } catch (error){
+      const errors = signInErrors(error);
+      res.status(200).json({ errors });
+    }
 };
 
 exports.logout = (req, res, next) => {
