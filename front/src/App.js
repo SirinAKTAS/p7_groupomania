@@ -1,17 +1,36 @@
 import {Routes, Route} from "react-router-dom";
-import Feed from "./pages/Feed";
-import Home from "./pages/Home";
 import Profil from "./pages/Profil";
+import Home from "./pages/Home";
+import { uidContext } from "./components/AppContext"; 
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [uid, setUid] = useState(null);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      await axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}jwtid`,
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res);
+        setUid(res.data)
+      })
+      .catch((err) => console.log('No token'));
+    };
+    fetchToken();
+  }, [uid]);
+
   return (
-    <div>
+    <uidContext.Provider value={uid}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profil" element={<Profil />} />
-        <Route path="/feed" element={<Feed />} />
       </Routes>
-    </div>
+    </uidContext.Provider>
   );
 }
 

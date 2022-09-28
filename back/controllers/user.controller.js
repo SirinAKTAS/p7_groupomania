@@ -18,22 +18,17 @@
  * Hashage du mot de passe 
  * Ajout de l'utilisateur dans la BDD après la création du compte
  */
-exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)
-      .then(hash => {
-        const user = new User({
-            pseudo: req.body.pseudo,
-            email: req.body.email,
-            password: hash
-        });
-        user.save()
-          .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-          .catch((error) =>{
-            const errors = signUpErrors(error);
-            res.status(400).json({ errors })
-          });
-      })
-      .catch(error => res.status(500).json({ error }));
+exports.signup = async (req, res, next) => {
+    const {pseudo, email, password} = req.body
+
+  try {
+    const user = await User.create({pseudo, email, password });
+    res.status(201).json({ user: user._id});
+  }
+  catch(error) {
+    const errors = signUpErrors(error);
+    res.status(200).send({ errors })
+  }
 };
 
 /**

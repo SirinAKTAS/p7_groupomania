@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const cors = require('cors');
 require('dotenv').config();
 
 const userRoutes = require('./routes/user.routes');
@@ -22,13 +23,7 @@ mongoose.connect(process.env.MONGODB_PATH,
 const app = express();
 app.use(express.json());
 
-// Fonction .setHeader pour ajouter des conditions dans les headers
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-});
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 
 app.use(bodyParser.json());
 app.use(cookieParser());

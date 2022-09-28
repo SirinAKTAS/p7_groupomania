@@ -13,6 +13,7 @@ const SignInForm = () => {
     axios({
         method: "POST",
         url: `${process.env.REACT_APP_API_URL}api/user/login`,
+        withCredentials: true,
         data: {
             email,
             password,
@@ -24,7 +25,7 @@ const SignInForm = () => {
             emailError.innerHTML = res.data.errors.email;
             passwordError.innerHTML = res.data.errors.password;
         } else {
-            window.location = "/feed";
+            window.location = "/";
         }
     })
     .catch ((err) => {
