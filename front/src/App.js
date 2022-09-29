@@ -1,5 +1,4 @@
 import {Routes, Route} from "react-router-dom";
-import Profil from "./pages/Profil";
 import Home from "./pages/Home";
 import { uidContext } from "./components/AppContext"; 
 import { useEffect, useState } from "react";
@@ -28,7 +27,6 @@ function App() {
     <uidContext.Provider value={uid}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/profil" element={<Profil />} />
       </Routes>
     </uidContext.Provider>
   );
