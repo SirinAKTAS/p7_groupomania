@@ -58,7 +58,7 @@ exports.login = async (req, res, next) => {
 
 exports.logout = (req, res, next) => {
     res.clearCookie("jwt");
-    res.status(200).json("OUT");
+    res.redirect("/");
 };
 
 

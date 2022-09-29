@@ -8,7 +8,7 @@ module.exports.signUpErrors = (error) => {
         errors.email = "Email incorrect ou déjà pris";
 
     if (error.message.includes('password'))
-        errors.password = "Mot de passe incorrect ou trop court";
+        errors.password = "Mot de passe incorrect ou trop court (6 caractères min)";
 
     return errors;
 };
