@@ -22,7 +22,7 @@ const Logout = () => {
     };
 
     return(
-        <li onClick={logout}>
+        <li onClick={logout} className="text-secondary">
             Se déconnecter
         </li>
     );

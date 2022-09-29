@@ -24,7 +24,7 @@ export default function FeedPage() {
                     <img className="h-20 w-full object-cover-fit md:h-full md:w-48 " src="../images/logoAvecNom.jpg" alt="Logo groupomania" />
                     <nav>
                         <ul className="flex pt-6 gap-16">
-                            <li onClick={handleModals} id="home" className={feedFormModal ? "text-primary" : "text-secondary"}>Home</li>
+                            <li onClick={handleModals} id="home" className={feedFormModal ? "text-primary" : "text-secondary"}>Acceuil</li>
                             <li onClick={handleModals} id="profil" className={profilFormModal ? "text-primary" : "text-secondary"}>Profil</li>
                             <Logout />
                         </ul>

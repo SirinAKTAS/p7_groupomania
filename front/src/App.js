@@ -3,9 +3,12 @@ import Home from "./pages/Home";
 import { uidContext } from "./components/AppContext"; 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getUser } from "./actions/user.action";
 
 function App() {
   const [uid, setUid] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -21,6 +24,9 @@ function App() {
       .catch((err) => console.log('No token'));
     };
     fetchToken();
+
+    if (uid) dispatch(getUser(uid))
+    // eslint-disable-next-line 
   }, [uid]);
 
   return (
