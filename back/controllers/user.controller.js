@@ -93,7 +93,6 @@ exports.modifyUser = (req, res, next) => {
             {
                 $set: {
                     bio: req.body.bio,
-                    picture: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
                 }
             },
             { new: true, upsert: true, setDefaultsOnInsert: true},

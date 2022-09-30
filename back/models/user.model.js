@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema(
         },
         picture: {
             type: String,
-            default: "default-profile-pic.jpg"
+            default: "http://localhost:5000/images/default-profile-pic.jpg1664543711172.jpg"
         },
         bio: {
             type: String,
