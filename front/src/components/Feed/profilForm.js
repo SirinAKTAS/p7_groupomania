@@ -15,7 +15,7 @@ export default function ProfilForm() {
     }
 
     return (
-        <>
+        <div className="flex justify-center items-center flex-col w-full">
             <h3 className="text-xl font-bold text-tertiary">Profil de {userData.pseudo}</h3>
             <p className="text-xs">Membre depuis le : {dateParser(userData.createdAt)}</p>
             <img src={userData.picture} alt="user-pic"  className="p-4 rounded-full object-cover-fit h-44 w-44"/>
@@ -34,6 +34,6 @@ export default function ProfilForm() {
                     </>
                 )}
             </div>
-        </>
+        </div>
     )
 }
