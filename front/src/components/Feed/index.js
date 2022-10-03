@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Logout from "../Log/logout";
 import ProfilForm from "./profilForm";
 import FeedForm from "./feedForm";
+import NewFormPost from "./newPostForm";
 
 export default function FeedPage() {
     const [profilFormModal, setProfilFormModal] = useState(false);
@@ -31,7 +32,12 @@ export default function FeedPage() {
                     </nav>
                 </div>
             </header>
-            <div className="flex justify-center items-center">
+            <div className="flex flex-col m-6 justify-center items-center">
+                {feedFormModal && (
+                <div className="flex justify-center flex-col w-full items-start rounded-2xl bg-white py-6 px-2">
+                    <NewFormPost />
+                </div>
+                )}
                 <div className="w-full flex justify-center flex-col items-start bg-white my-12 mx-8 py-8 px-2 rounded-2xl">
                     {feedFormModal && <FeedForm />}
                     {profilFormModal && <ProfilForm />}

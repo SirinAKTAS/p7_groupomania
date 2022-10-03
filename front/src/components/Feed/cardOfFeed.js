@@ -42,7 +42,7 @@ const Card = ({ post }) => {
                 {isUpdated === false && <p className="py-4">{post.message}</p>}
                 {isUpdated === true && (
                     <>
-                        <textarea className="italic bg-tertiary/25 p-2 rounded-xl border-solid border-2 border-primary"
+                        <textarea className="w-full italic bg-tertiary/25 p-2 rounded-xl border-solid border-2 border-primary"
                         defaultValue={post.message}
                         onChange={(e) => setTextUpdate(e.target.value)} 
                         />
@@ -54,12 +54,12 @@ const Card = ({ post }) => {
                     </>
                 )}
                 { post.pictureUrl && (
-                    <img className="pr-4 py-4" src={post.pictureUrl} alt="card-pic" />
+                    <img className="pr-4 py-4 md:h-80" src={post.pictureUrl} alt="card-pic" />
                 )}
             
                 <div className="flex justify-between gap-4 mt-2">
                     <LikeButton post={post} />
-                    <div className="flex mr-2">
+                    <div className="flex gap-6 mr-2">
                         {userData._id === post.posterId && (
                             <>
                                 <div onClick={() => setIsUpdated(!isUpdated)}>
