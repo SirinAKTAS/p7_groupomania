@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../../Utils";
+import LikeButton from "./likeButton";
 
 const Card = ({ post }) => {
     const usersData = useSelector((state) => state.usersReducer);
@@ -18,7 +19,7 @@ const Card = ({ post }) => {
                     if (user._id === post.posterId) return user.picture;
                 }).join('')
             } alt="poster-pic" />
-            <div className="">
+            <div className="w-full">
                 <h3 className="font-bold">
                     {
                         !isEmpty(usersData[0]) &&
@@ -34,19 +35,10 @@ const Card = ({ post }) => {
                 )}
             
                 <div className="flex gap-4">
-                    <div className="flex items-center gap-2">
-                        <i className="fa-solid fa-comment text-tertiary"></i>
-                        <span>{post.comments.length}</span>
-                    </div>
-                
-                    <div className="flex items-center gap-2">
-                        <i className="fa-solid fa-heart text-tertiary"></i>
-                        <span>{post.likers.length}</span>
-                    </div>
+                    <LikeButton post={post} />
                 </div>
 
-            </div>
-           
+            </div>   
         </li>
     );
 };
