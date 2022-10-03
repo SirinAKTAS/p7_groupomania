@@ -36,7 +36,6 @@ exports.modifyPost = (req, res, next) => {
 
   const updatedRecord = {
     message: req.body.message,
-    pictureUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
   };
 
   PostModel.findByIdAndUpdate(
@@ -55,13 +54,10 @@ exports.deletePost = (req, res, next) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
   
-  const filename = PostModel.pictureUrl.split('/images/')[1];
-  fs.unlink(`images/${filename}`, () => {
     PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
       if (!err) res.send("Post deleted");
       else console.log("Delete error : " + err);
     })
-  })
 };
 
 // ***************************** SYSTEME DE LIKE / UNLIKE ********************************

@@ -28,7 +28,7 @@ const LikeButton = ({ post }) => {
         <div className="flex items-center gap-2">
             {uid && liked === false && (
                 <>
-                    <i className="fa-solid fa-heart text-tertiary" onClick={like}></i>
+                    <i className="fa-solid fa-heart text-tertiary/70" onClick={like}></i>
                     <span>{post.likers.length}</span>
                 </>
             )}

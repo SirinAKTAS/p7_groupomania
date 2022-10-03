@@ -26,8 +26,7 @@ function App() {
     fetchToken();
 
     if (uid) dispatch(getUser(uid))
-    // eslint-disable-next-line 
-  }, [uid]);
+  }, [uid, dispatch]);
 
   return (
     <uidContext.Provider value={uid}>

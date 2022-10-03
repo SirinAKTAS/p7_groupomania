@@ -14,8 +14,7 @@ export default function FeedForm() {
             dispatch(getPosts());
             setLoadPost(false)
         }
-    // eslint-disable-next-line 
-    }, [loadPost])
+    }, [loadPost, dispatch])
 
     return (
         <div className="border-solid border-2 flex w-full">
