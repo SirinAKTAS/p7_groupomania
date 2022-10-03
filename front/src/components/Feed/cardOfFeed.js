@@ -8,7 +8,6 @@ import LikeButton from "./likeButton";
 const Card = ({ post }) => {
     const [isUpdated, setIsUpdated] = useState(false);
     const [textUpdate, setTextUpdate] = useState(null);
-    const [imgUpdate, setImgUpdate] = useState(null);
     const usersData = useSelector((state) => state.usersReducer);
     const userData = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
@@ -21,7 +20,7 @@ const Card = ({ post }) => {
     }
 
     return (
-        <li className="border-solid border-2 border-purple-400 flex gap-2" key={post._id}>
+        <li className="border-solid border-2 border-secondary rounded-lg flex gap-2" key={post._id}>
             <img className="h-16 w-16 rounded-full" src={
                 !isEmpty(usersData[0]) &&
                 usersData.map((user) => {

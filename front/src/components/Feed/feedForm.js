@@ -17,8 +17,8 @@ export default function FeedForm() {
     }, [loadPost, dispatch])
 
     return (
-        <div className="border-solid border-2 flex w-full">
-            <ul className="border-solid border-2 border-red-400 flex flex-col w-full gap-4">
+        <div className="flex w-full">
+            <ul className="flex flex-col w-full gap-4">
                 {!isEmpty(posts[0]) &&
                 posts.map((post) => {
                     return <Card post={post} key={post._id} />;
