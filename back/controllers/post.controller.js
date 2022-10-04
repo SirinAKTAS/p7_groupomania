@@ -1,7 +1,7 @@
 const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectID = require("mongoose").Types.ObjectId;
-const fs = require('fs');
+const fs = require("fs");
 
 // Affichage des post
 exports.readPost = (req, res, next) => {
@@ -16,7 +16,9 @@ exports.createPost = async (req, res, next) => {
   const newPost = new PostModel({
     posterId: req.body.posterId,
     message: req.body.message,
-    pictureUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    pictureUrl: `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`,
     likers: [],
     comments: [],
   });
@@ -53,11 +55,11 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-  
-    PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
-      if (!err) res.send("Post deleted");
-      else console.log("Delete error : " + err);
-    })
+
+  PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
+    if (!err) res.send("Post deleted");
+    else console.log("Delete error : " + err);
+  });
 };
 
 // ***************************** SYSTEME DE LIKE / UNLIKE ********************************

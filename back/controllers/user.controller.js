@@ -3,31 +3,30 @@
  * Import de jsonwebtoken pour sécurisé le token
  * Import du dossier .env pour sécurisé un élement
  */
- const bcrypt = require('bcrypt');
- const jwt = require('jsonwebtoken');
- const User = require('../models/user.model');
- require('dotenv').config();
- const fs = require('fs');
- const ObjectID = require('mongoose').Types.ObjectId;
- const { signUpErrors, signInErrors } = require('../utils/errors.utils');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
+require("dotenv").config();
+const fs = require("fs");
+const ObjectID = require("mongoose").Types.ObjectId;
+const { signUpErrors, signInErrors } = require("../utils/errors.utils");
 
 // ************************************************ AUTH *********************************************************************
 
 /**
  * Crypter le mot de passe 10x pour la sécurité du champ
- * Hashage du mot de passe 
+ * Hashage du mot de passe
  * Ajout de l'utilisateur dans la BDD après la création du compte
  */
 exports.signup = async (req, res, next) => {
-    const {pseudo, email, password} = req.body
+  const { pseudo, email, password } = req.body;
 
   try {
-    const user = await User.create({pseudo, email, password });
-    res.status(201).json({ user: user._id});
-  }
-  catch(error) {
+    const user = await User.create({ pseudo, email, password });
+    res.status(201).json({ user: user._id });
+  } catch (error) {
     const errors = signUpErrors(error);
-    res.status(200).send({ errors })
+    res.status(200).send({ errors });
   }
 };
 
@@ -38,45 +37,43 @@ exports.signup = async (req, res, next) => {
  */
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 const createToken = (id) => {
-    return jwt.sign({id}, process.env.TOKEN_KEY, {
-        expiresIn: maxAge
-    })
-}
+  return jwt.sign({ id }, process.env.TOKEN_KEY, {
+    expiresIn: maxAge,
+  });
+};
 exports.login = async (req, res, next) => {
-    const { email, password } = req.body
+  const { email, password } = req.body;
 
-    try {
-      const user = await User.login(email, password);
-      const token = createToken(user._id);
-      res.cookie('jwt', token, { httpOnly: true, maxAge});
-      res.status(200).json({ user: user._id, token})
-    } catch (error){
-      const errors = signInErrors(error);
-      res.status(200).json({ errors });
-    }
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge });
+    res.status(200).json({ user: user._id, token });
+  } catch (error) {
+    const errors = signInErrors(error);
+    res.status(200).json({ errors });
+  }
 };
 
 exports.logout = (req, res, next) => {
-    res.clearCookie("jwt");
-    res.redirect("/");
+  res.clearCookie("jwt");
+  res.redirect("/");
 };
-
 
 // ********************************************* USER SETTINGS ****************************************************************
 
-
 // Afficher tout les Users
 exports.getAllUsers = (req, res, next) => {
-    User.find()
-        .then(users => res.status(200).json(users))
-        .catch(error => res.status(400).json({ error }));
+  User.find()
+    .then((users) => res.status(200).json(users))
+    .catch((error) => res.status(400).json({ error }));
 };
 
 // Afficher un User
 exports.getOneUser = (req, res, next) => {
-    User.findOne({ _id: req.params.id })
-        .then(user => res.status(200).json(user))
-        .catch(error => res.status(404).json({ error }));
+  User.findOne({ _id: req.params.id })
+    .then((user) => res.status(200).json(user))
+    .catch((error) => res.status(404).json({ error }));
 };
 
 /**
@@ -84,40 +81,40 @@ exports.getOneUser = (req, res, next) => {
  * Si Non = msg d'erreur, si Oui = maj dans la BDD
  */
 exports.modifyUser = (req, res, next) => {
-    if (!ObjectID.isValid(req.params.id)) {
-        return res.status(400).send('ID unknown : ' + req.params.id);
-    }
-    try {
-        User.findOneAndUpdate(
-            {_id: req.params.id},
-            {
-                $set: {
-                    bio: req.body.bio,
-                }
-            },
-            { new: true, upsert: true, setDefaultsOnInsert: true},
-            (err, docs) => {
-                if (!err) {
-                    return res.send(docs);
-                } else {
-                    return res.status(500).send({ message: err});
-                }
-            }
-        )
-    } catch (err) {
-        return res.status(500).json({ message: err});
-    }
+  if (!ObjectID.isValid(req.params.id)) {
+    return res.status(400).send("ID unknown : " + req.params.id);
+  }
+  try {
+    User.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          bio: req.body.bio,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true },
+      (err, docs) => {
+        if (!err) {
+          return res.send(docs);
+        } else {
+          return res.status(500).send({ message: err });
+        }
+      }
+    );
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
 };
 
 exports.deleteUser = (req, res, next) => {
-    if (!ObjectID.isValid(req.params.id)) {
-        return res.status(400).send('ID unknown : ' + req.params.id)
-    }
+  if (!ObjectID.isValid(req.params.id)) {
+    return res.status(400).send("ID unknown : " + req.params.id);
+  }
 
-    try {
-        User.deleteOne({_id: req.params.id}).exec();
-        res.status(200).json({ message: "Utilisateur supprimé."});
-    } catch (err) {
-        return res.status(500).json({ message: err});
-    }
+  try {
+    User.deleteOne({ _id: req.params.id }).exec();
+    res.status(200).json({ message: "Utilisateur supprimé." });
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
 };

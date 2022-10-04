@@ -4,15 +4,7 @@ import { uidContext } from "../components/AppContext";
 import Feed from "./Feed";
 
 export default function Home() {
-    const uid = useContext(uidContext);
+  const uid = useContext(uidContext);
 
-    return (
-        <>
-        { uid ? (
-            <Feed />
-        ) : (
-            <Log />
-        )}
-        </>
-    )
+  return <>{uid ? <Feed /> : <Log />}</>;
 }

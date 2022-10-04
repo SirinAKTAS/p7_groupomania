@@ -1,6 +1,6 @@
-import {Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import { uidContext } from "./components/AppContext"; 
+import { uidContext } from "./components/AppContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -17,15 +17,15 @@ function App() {
         url: `${process.env.REACT_APP_API_URL}jwtid`,
         withCredentials: true,
       })
-      .then((res) => {
-        console.log(res);
-        setUid(res.data)
-      })
-      .catch((err) => console.log('No token'));
+        .then((res) => {
+          console.log(res);
+          setUid(res.data);
+        })
+        .catch((err) => console.log("No token"));
     };
     fetchToken();
 
-    if (uid) dispatch(getUser(uid))
+    if (uid) dispatch(getUser(uid));
   }, [uid, dispatch]);
 
   return (

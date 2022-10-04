@@ -1,25 +1,26 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { Provider } from 'react-redux';
-import { applyMiddleware } from 'redux';
-import { legacy_createStore as createStore} from 'redux'
-import thunk from 'redux-thunk';
-import rootReducer from './reducers/index'
-import { getUsers } from './actions/users.action';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { Provider } from "react-redux";
+import { applyMiddleware } from "redux";
+import { legacy_createStore as createStore } from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers/index";
+import { getUsers } from "./actions/users.action";
 
 // dev tools
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const store = createStore(
-  rootReducer, composeWithDevTools(applyMiddleware(thunk))
-)
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 store.dispatch(getUsers());
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <Provider store={store}>
