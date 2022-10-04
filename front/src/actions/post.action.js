@@ -66,14 +66,14 @@ export const updatePost = (postId, message) => {
   };
 };
 
-export const deletePost = (postId) => {
+export const deletePost = (postId, pictureUrl) => {
   return (dispatch) => {
     return axios({
       method: "delete",
       url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
     })
       .then((res) => {
-        dispatch({ type: DELETE_POST, payload: { postId } });
+        dispatch({ type: DELETE_POST, payload: { postId, pictureUrl } });
       })
       .catch((err) => console.log(err));
   };

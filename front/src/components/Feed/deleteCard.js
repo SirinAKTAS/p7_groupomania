@@ -6,7 +6,7 @@ const DeleteCard = (props) => {
   const dispatch = useDispatch();
 
   const deleteQuote = () => {
-    dispatch(deletePost(props.id));
+    dispatch(deletePost(props.id, props.pictureUrl));
   };
 
   return (

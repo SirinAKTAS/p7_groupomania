@@ -53,13 +53,29 @@ exports.modifyPost = (req, res, next) => {
 
 // Suppression d'un Post
 exports.deletePost = (req, res, next) => {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
+  PostModel.findOne({ _id: req.params.id})
+  .then(post => {
 
-  PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
-    if (!err) res.send("Post deleted");
-    else console.log("Delete error : " + err);
+    if (!ObjectID.isValid(req.params.id)) {
+      return res.status(400).send("ID unknown : " + req.params.id);
+    } else {
+      const filename = post.pictureUrl.split('/images/')[1];
+      fs.unlink(`images/${filename}`, () => {
+        
+        PostModel.findByIdAndRemove({_id: req.params.id})
+        .then(() => { res.status(200).json({message: 'Post supprimé !'})})
+        .catch(error => res.status(401).json({error}));
+
+      })
+     
+  
+    }
+
+  })
+  .catch (error => {
+    res.status(500).json({error});
   });
+  
 };
 
 // ***************************** SYSTEME DE LIKE / UNLIKE ********************************
