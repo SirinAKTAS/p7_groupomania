@@ -17,7 +17,7 @@ const DeleteCard = (props) => {
         }
       }}
     >
-      <i className="fa-solid fa-trash text-primary"></i>
+      <i className="fa-solid fa-trash text-primary cursor-pointer"></i>
     </div>
   );
 };

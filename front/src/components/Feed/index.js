@@ -20,26 +20,26 @@ export default function FeedPage() {
 
   return (
     <>
-      <header className="bg-white">
-        <div className="flex justify-between flex-col items-center p-2">
+      <header className="bg-white w-full">
+        <div className="flex justify-between flex-col items-center p-2 md:flex-row">
           <img
             className="h-20 w-full object-cover-fit md:h-full md:w-48 "
             src="../images/logoAvecNom.jpg"
             alt="Logo groupomania"
           />
           <nav>
-            <ul className="flex pt-6 gap-16">
+            <ul className="flex pt-6 gap-16 md:pt-0">
               <li
                 onClick={handleModals}
                 id="home"
-                className={feedFormModal ? "text-primary" : "text-secondary"}
+                className={feedFormModal ? "text-primary cursor-pointer" : "text-secondary cursor-pointer"}
               >
                 Acceuil
               </li>
               <li
                 onClick={handleModals}
                 id="profil"
-                className={profilFormModal ? "text-primary" : "text-secondary"}
+                className={profilFormModal ? "text-primary cursor-pointer" : "text-secondary cursor-pointer"}
               >
                 Profil
               </li>
@@ -48,16 +48,18 @@ export default function FeedPage() {
           </nav>
         </div>
       </header>
-      <div className="flex flex-col m-6 justify-center items-center">
-        {feedFormModal && (
-          <div className="flex justify-center flex-col w-full items-start rounded-2xl bg-white py-6 px-2">
-            <NewFormPost />
+      <div className="m-4 flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
+          {feedFormModal && (
+            <div className="flex justify-center flex-col w-full items-start rounded-2xl bg-white py-6 px-2">
+              <NewFormPost />
+            </div>
+          )}
+          <div className="w-full flex justify-center flex-col items-start bg-white my-12 mx-8 py-8 px-2 rounded-2xl">
+            {feedFormModal && <FeedForm />}
+            {profilFormModal && <ProfilForm />}
           </div>
-        )}
-        <div className="w-full flex justify-center flex-col items-start bg-white my-12 mx-8 py-8 px-2 rounded-2xl">
-          {feedFormModal && <FeedForm />}
-          {profilFormModal && <ProfilForm />}
-        </div>
+      </div>
       </div>
     </>
   );

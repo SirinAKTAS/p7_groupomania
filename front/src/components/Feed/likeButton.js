@@ -27,14 +27,14 @@ const LikeButton = ({ post }) => {
     <div className="flex items-center gap-2">
       {uid && liked === false && (
         <>
-          <i className="fa-solid fa-heart text-tertiary/70" onClick={like}></i>
+          <i className="fa-solid fa-heart text-tertiary/70 cursor-pointer" onClick={like}></i>
           <span>{post.likers.length}</span>
         </>
       )}
 
       {uid && liked === true && (
         <>
-          <i className="fa-solid fa-heart text-primary" onClick={unlike}></i>
+          <i className="fa-solid fa-heart text-primary cursor-pointer" onClick={unlike}></i>
           <span>{post.likers.length}</span>
         </>
       )}
