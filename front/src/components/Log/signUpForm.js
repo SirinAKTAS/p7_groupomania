@@ -93,7 +93,7 @@ const SignUpForm = () => {
           <input
             type="submit"
             value="S'inscrire"
-            className="bg-secondary px-6 py-4 rounded-3xl text-primary"
+            className="bg-secondary px-6 py-4 rounded-3xl text-primary cursor-pointer"
           />
         </form>
       )}

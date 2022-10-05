@@ -7,34 +7,39 @@ const SignInForm = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const emailError = document.getElementById('emailError');
-    const passwordError = document.getElementById('passwordError');
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
 
     axios({
-        method: "POST",
-        url: `${process.env.REACT_APP_API_URL}api/user/login`,
-        withCredentials: true,
-        data: {
-            email,
-            password,
-        },
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}api/user/login`,
+      withCredentials: true,
+      data: {
+        email,
+        password,
+      },
     })
-    .then((res) => {
-      console.log(res)
+      .then((res) => {
+        console.log(res);
         if (res.data.errors) {
-            emailError.innerHTML = res.data.errors.email;
-            passwordError.innerHTML = res.data.errors.password;
+          emailError.innerHTML = res.data.errors.email;
+          passwordError.innerHTML = res.data.errors.password;
         } else {
-            window.location = "/";
+          window.location = "/";
         }
-    })
-    .catch ((err) => {
+      })
+      .catch((err) => {
         console.log(err);
-    });
+      });
   };
 
   return (
-    <form action="" onSubmit={handleLogin} id="sign-up-form" className="flex flex-col justify-center items-center text-tertiary ">
+    <form
+      action=""
+      onSubmit={handleLogin}
+      id="sign-up-form"
+      className="flex flex-col justify-center items-center text-tertiary "
+    >
       <label htmlFor="email">Email</label>
       <br />
       <input
@@ -45,9 +50,11 @@ const SignInForm = () => {
         value={email}
         className="bg-tertiary/25 rounded-md"
       />
-      <div id='emailError' className="text-primary"></div>
+      <div id="emailError" className="text-primary"></div>
       <br />
-      <label htmlFor="password" className="p-2">Mot de passe</label>
+      <label htmlFor="password" className="p-2">
+        Mot de passe
+      </label>
       <br />
       <input
         type="password"
@@ -57,9 +64,13 @@ const SignInForm = () => {
         value={password}
         className="bg-tertiary/25 rounded-md"
       />
-        <div id="passwordError" className="text-primary"></div>
+      <div id="passwordError" className="text-primary"></div>
       <br />
-      <input type="submit" value="Se connecter" className="bg-secondary px-6 py-4 rounded-3xl text-primary" />
+      <input
+        type="submit"
+        value="Se connecter"
+        className="bg-secondary px-6 py-4 rounded-3xl text-primary cursor-pointer"
+      />
     </form>
   );
 };
