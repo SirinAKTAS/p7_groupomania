@@ -19,6 +19,10 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      margin: {
+        '600px': '600px',
+        '900px': '900px',
+      },
       colors: {
         primary: "#FD2D01",
         secondary: "#FFD7D7",

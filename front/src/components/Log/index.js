@@ -23,8 +23,8 @@ const Log = () => {
                     <img className="h-20 w-full object-cover-fit md:h-full md:w-48 " src="../images/logoAvecNom.jpg" alt="Logo groupomania" />
                     <nav>
                         <ul className="flex pt-6 gap-16">
-                            <li onClick={handleModals} id='register' className={signUpModal ? "text-primary" : "text-secondary"}>S'inscrire</li>
-                            <li onClick={handleModals} id='login'className={signInModal ? "text-primary" : "text-secondary"}>Se connecter</li>
+                            <li onClick={handleModals} id='register' className={signUpModal ? "text-primary cursor-pointer" : "text-secondary cursor-pointer"}>S'inscrire</li>
+                            <li onClick={handleModals} id='login'className={signInModal ? "text-primary cursor-pointer" : "text-secondary cursor-pointer"}>Se connecter</li>
                         </ul>
                     </nav>
                 </div>

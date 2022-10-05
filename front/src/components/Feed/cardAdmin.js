@@ -3,13 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePost } from "../../actions/post.action";
 import { dateParser, isEmpty } from "../../Utils";
 import DeleteCard from "./deleteCard";
-import LikeButton from "./likeButton";
 
-const Card = ({ post }) => {
+const CardAdmin = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
   const usersData = useSelector((state) => state.usersReducer);
-  const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const updateItem = async () => {
@@ -75,16 +73,14 @@ const Card = ({ post }) => {
         )}
 
         <div className="flex justify-between gap-4 mt-2">
-          <LikeButton post={post} />
           <div className="flex gap-6 mr-2">
-            {userData._id === post.posterId && (
               <>
                 <div onClick={() => setIsUpdated(!isUpdated)}>
                   <i className="fa-solid fa-pen-to-square text-primary mr-2 cursor-pointer"></i>
                 </div>
                 <DeleteCard id={post._id} />
               </>
-            )}
+            
           </div>
         </div>
       </div>
@@ -92,4 +88,4 @@ const Card = ({ post }) => {
   );
 };
 
-export default Card;
+export default CardAdmin;

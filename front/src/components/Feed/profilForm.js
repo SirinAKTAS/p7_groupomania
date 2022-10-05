@@ -15,7 +15,7 @@ export default function ProfilForm() {
   };
 
   return (
-    <div className="flex justify-center items-center flex-col w-full">
+    <div className="flex justify-center items-center flex-col w-full border-2 border-solid border-primary rounded-2xl">
       <h3 className="text-xl font-bold text-tertiary">
         Profil de {userData.pseudo}
       </h3>

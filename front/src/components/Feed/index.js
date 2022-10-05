@@ -48,18 +48,18 @@ export default function FeedPage() {
           </nav>
         </div>
       </header>
-      <div className="m-4 flex justify-center items-center">
-        <div className="flex flex-col justify-center items-center">
+      <div className="mt-6 mx-2 flex justify-center items-center">
+        <div className="flex w-full flex-col justify-center items-center md:w-[600px] 2xl:w-[900px] ">
           {feedFormModal && (
             <div className="flex justify-center flex-col w-full items-start rounded-2xl bg-white py-6 px-2">
               <NewFormPost />
             </div>
           )}
-          <div className="w-full flex justify-center flex-col items-start bg-white my-12 mx-8 py-8 px-2 rounded-2xl">
+          <div className="w-full flex justify-center flex-col items-start bg-white my-12 mx-8 py-8 px-2 rounded-2xl md:w-[600px] 2xl:w-[900px]">
             {feedFormModal && <FeedForm />}
             {profilFormModal && <ProfilForm />}
           </div>
-      </div>
+        </div>
       </div>
     </>
   );
