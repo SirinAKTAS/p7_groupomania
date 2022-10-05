@@ -3,6 +3,10 @@ import axios from "axios";
 import SignInForm from "./signInForm";
 
 const SignUpForm = () => {
+  /**
+   * Pseudo, email, password sont mis par défaut vide grâce au useState
+   * Bouton s'inscrire mis sur false par defaut
+   */
   const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +17,9 @@ const SignUpForm = () => {
     const pseudoError = document.getElementById("pseudoError");
     const emailError = document.getElementById("emailError");
     const passwordError = document.getElementById("passwordError");
-
+    
+    // Envoi de la data à l'url prédéfinis au back, en cas d'erreur on affiche les erreurs également choisis au back
+    // Si pas d'erreur, on passe le setFormSubmit sur true
     axios({
       method: "POST",
       url: `${process.env.REACT_APP_API_URL}api/user/signup`,
@@ -38,6 +44,7 @@ const SignUpForm = () => {
       });
   };
 
+  // Si inscription réussi on nous redirige sur la Form de connection avec un msg d'enregistrement réussi
   return (
     <>
       {formSubmit ? (

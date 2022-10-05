@@ -1,3 +1,4 @@
+// Mise en place des messages d'erreur lors de l'inscription
 module.exports.signUpErrors = (error) => {
     let errors = { pseudo: "", email: "", password: "" };
 
@@ -13,6 +14,7 @@ module.exports.signUpErrors = (error) => {
     return errors;
 };
 
+// Mise en place des messages d'erreur lors de la connection
 module.exports.signInErrors = (error) => {
     let errors = { email: "", password: "" };
 

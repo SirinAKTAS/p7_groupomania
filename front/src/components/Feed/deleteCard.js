@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../actions/post.action";
 
+// Fonction de suppression d'un post avec une alert de confirmation
 const DeleteCard = (props) => {
   const dispatch = useDispatch();
 

@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user.model");
 
+// Fonction pour vérifier la validité d'un token/cookie d'un utilisateur
 module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
@@ -21,6 +22,7 @@ module.exports.checkUser = (req, res, next) => {
   }
 };
 
+// Fonction pour vérifier sur il existe un token ou non
 module.exports.requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {

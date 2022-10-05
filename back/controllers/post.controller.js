@@ -11,12 +11,15 @@ exports.readPost = (req, res, next) => {
   }).sort({ createdAt: -1 });
 };
 
-// Création d'un post
+// Création d'un post, possibilité de poster un commentaire avec ou sans images et une image avec ou sans commentaire
 exports.createPost = async (req, res, next) => {
   const newPost = new PostModel({
     posterId: req.body.posterId,
     message: req.body.message,
-    pictureUrl: req.file !== undefined ? `${req.protocol}://${req.get("host")}/images/${ req.file.filename }` : "",
+    pictureUrl:
+      req.file !== undefined
+        ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        : "",
     likers: [],
     comments: [],
   });
@@ -51,29 +54,24 @@ exports.modifyPost = (req, res, next) => {
 
 // Suppression d'un Post
 exports.deletePost = (req, res, next) => {
-  PostModel.findOne({ _id: req.params.id})
-  .then(post => {
-
-    if (!ObjectID.isValid(req.params.id)) {
-      return res.status(400).send("ID unknown : " + req.params.id);
-    } else {
-      const filename = post.pictureUrl.split('/images/')[1];
-      fs.unlink(`images/${filename}`, () => {
-        
-        PostModel.findByIdAndRemove({_id: req.params.id})
-        .then(() => { res.status(200).json({message: 'Post supprimé !'})})
-        .catch(error => res.status(401).json({error}));
-
-      })
-     
-  
-    }
-
-  })
-  .catch (error => {
-    res.status(500).json({error});
-  });
-  
+  PostModel.findOne({ _id: req.params.id })
+    .then((post) => {
+      if (!ObjectID.isValid(req.params.id)) {
+        return res.status(400).send("ID unknown : " + req.params.id);
+      } else {
+        const filename = post.pictureUrl.split("/images/")[1];
+        fs.unlink(`images/${filename}`, () => {
+          PostModel.findByIdAndRemove({ _id: req.params.id })
+            .then(() => {
+              res.status(200).json({ message: "Post supprimé !" });
+            })
+            .catch((error) => res.status(401).json({ error }));
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
 };
 
 // ***************************** SYSTEME DE LIKE / UNLIKE ********************************

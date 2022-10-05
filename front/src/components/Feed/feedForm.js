@@ -4,6 +4,7 @@ import { getPosts } from "../../actions/post.action";
 import { isEmpty } from "../../Utils";
 import Card from "./cardOfFeed";
 
+// Affichage dans un ul tout les posts qu'on récupère depuis le store
 export default function FeedForm() {
   const [loadPost, setLoadPost] = useState(true);
   const dispatch = useDispatch();

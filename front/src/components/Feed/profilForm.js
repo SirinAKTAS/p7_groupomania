@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateBio } from "../../actions/user.action";
 import { dateParser } from "../../Utils";
 
+/**
+ * Affichage des informations de l'user depuis le store
+ * Modification possible seulement de la bio pour le moment
+ */
 export default function ProfilForm() {
   const [bio, setBio] = useState("");
   const [updateForm, setUpdateForm] = useState(false);

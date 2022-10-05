@@ -4,6 +4,7 @@ import { updatePost } from "../../actions/post.action";
 import { dateParser, isEmpty } from "../../Utils";
 import DeleteCard from "./deleteCard";
 
+// Affichage si l'admin est connecté
 const CardAdmin = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);

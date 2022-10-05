@@ -4,6 +4,7 @@ import ProfilForm from "./profilForm";
 import FeedForm from "./feedForm";
 import NewFormPost from "./newPostForm";
 
+// Function principal qui permet l'affichage des différentes pages sur une seule route
 export default function FeedPage() {
   const [profilFormModal, setProfilFormModal] = useState(false);
   const [feedFormModal, setFeedFormModal] = useState(true);

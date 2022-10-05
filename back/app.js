@@ -1,3 +1,4 @@
+// Import des différents packages pour le projet 
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -6,9 +7,11 @@ const path = require("path");
 const cors = require("cors");
 require("dotenv").config();
 
+// import des différentes routes user et post
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
 
+// Import de checkUser et requireAuth pour la vérification de l'utilisateur lors du login/signup
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 
 // Fonction .connect pour lier notre BDD à notre serveur

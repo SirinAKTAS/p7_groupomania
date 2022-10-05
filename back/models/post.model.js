@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Model d'un post qui sera envoyé dans la BDD
 const PostSchema = new mongoose.Schema(
   {
     posterId: {

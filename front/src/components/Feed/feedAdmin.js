@@ -5,6 +5,7 @@ import { isEmpty } from "../../Utils";
 import Logout from "../Log/logout";
 import CardAdmin from "./cardAdmin";
 
+// Affichage si l'admin est connecté
 export default function FeedAdmin() {
     const [loadPost, setLoadPost] = useState(true);
     const dispatch = useDispatch();

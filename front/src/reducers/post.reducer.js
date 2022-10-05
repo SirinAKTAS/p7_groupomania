@@ -8,6 +8,13 @@ import {
 
 const initialState = {};
 
+/**
+ * Fonction qui permet de récupérer les informations de tout les posts dans le cas où l'action GET_POSTS est appliqué
+ * Lorsque l'action d'un like est appliqué on envoi dans le store l'id du nouveau like en + des autres likes
+ * Lorsque l'action d'unlike est appliqué on envoi dans le store l'id du nouveau unlike en + des autres unlikes
+ * Lorsqu'on modifie un post une action est appliqué au reducer, on envoi la nouvelle data dans le store
+ * Suppression de la data dans le store
+ */
 export default function postReducer(state = initialState, action) {
   switch (action.type) {
     case GET_POSTS:

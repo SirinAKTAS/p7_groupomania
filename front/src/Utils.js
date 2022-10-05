@@ -1,3 +1,4 @@
+// Fonction pour convertir la valeur de timestamp comme on le veut
 export const dateParser = (num) => {
   let options = {
     hour: "2-digit",
@@ -13,6 +14,7 @@ export const dateParser = (num) => {
   return date.toString();
 };
 
+// Fonction pour vérifier si la page est vide 
 export const isEmpty = (value) => {
   return (
     value === undefined ||

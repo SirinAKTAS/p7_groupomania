@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require("../middleware/multer.middleware");
 const postCtrl = require("../controllers/post.controller");
 
-// Post
+// Routes post
 router.get("/", postCtrl.readPost);
 router.post("/", multer, postCtrl.createPost);
 router.put("/:id", multer, postCtrl.modifyPost);

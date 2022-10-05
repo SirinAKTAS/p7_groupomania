@@ -3,6 +3,10 @@ import axios from "axios";
 export const GET_USER = "GET_USER";
 export const UPDATE_BIO = "UPDATE_BIO";
 
+/**
+ * Récupération depuis l'api des données de l'utilisateur qui est connecté
+ * Modification de la bio depuis la route d'api en méthode put
+ */
 export const getUser = (uid) => {
   return (dispatch) => {
     return axios

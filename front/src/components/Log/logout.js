@@ -3,6 +3,7 @@ import axios from "axios";
 import cookie from "js-cookie";
 
 const Logout = () => {
+    // Suppression du cookie lors d'une déconnection
     const  removeCookie = (key) => {
         if (window !== "undefined") {
             cookie.remove(key, {expires: 1});

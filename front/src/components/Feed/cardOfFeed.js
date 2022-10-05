@@ -5,7 +5,12 @@ import { dateParser, isEmpty } from "../../Utils";
 import DeleteCard from "./deleteCard";
 import LikeButton from "./likeButton";
 
-const Card = ({ post }) => {
+/**
+ * Affichage des données des post depuis le store
+ * Affichage d'icones selon l'utilisateur connecter
+ * Affichage des données de tout les utilisateurs, également de la personne connecté
+ */
+  const Card = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
   const usersData = useSelector((state) => state.usersReducer);

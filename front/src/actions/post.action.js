@@ -7,6 +7,10 @@ export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 
+/**
+ * Récupération depuis l'api de tout les posts
+ * Action qu'on envoi au reducer (donc dans le store)
+ */
 export const getPosts = () => {
   return (dispatch) => {
     return axios

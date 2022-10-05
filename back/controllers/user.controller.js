@@ -41,6 +41,7 @@ const createToken = (id) => {
     expiresIn: maxAge,
   });
 };
+
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -55,6 +56,7 @@ exports.login = async (req, res, next) => {
   }
 };
 
+// Lors du logout on supprime le cookie et on redirige l'utilisateur sur une page précise
 exports.logout = (req, res, next) => {
   res.clearCookie("jwt");
   res.redirect("/");
@@ -101,19 +103,6 @@ exports.modifyUser = (req, res, next) => {
         }
       }
     );
-  } catch (err) {
-    return res.status(500).json({ message: err });
-  }
-};
-
-exports.deleteUser = (req, res, next) => {
-  if (!ObjectID.isValid(req.params.id)) {
-    return res.status(400).send("ID unknown : " + req.params.id);
-  }
-
-  try {
-    User.deleteOne({ _id: req.params.id }).exec();
-    res.status(200).json({ message: "Utilisateur supprimé." });
   } catch (err) {
     return res.status(500).json({ message: err });
   }

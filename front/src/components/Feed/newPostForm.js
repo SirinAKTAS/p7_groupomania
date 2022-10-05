@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost, getPosts } from "../../actions/post.action";
 
+/**
+ * Affichage de quelques informations de l'user depuis le store
+ * Lors de la publication, envoi des nouvelles données dans le store, si tout les champs sont vides une alerte s'affiche
+ */
 export default function NewFormPost() {
   const [message, setMessage] = useState("");
   const [postPicture, setPostPicture] = useState(null);
@@ -73,7 +77,7 @@ export default function NewFormPost() {
           className="bg-secondary px-2 py-1 rounded-xl"
           onClick={handlePost}
         >
-          Envoyer
+          Publier
         </button>
       </div>
     </>

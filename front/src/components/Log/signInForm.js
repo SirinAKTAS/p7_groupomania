@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const SignInForm = () => {
+  // Mis par defaut un champ vide pour les valeurs "email" et "password", le champ se remplis lors de la saisie dans le body avec un onChange
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,6 +11,7 @@ const SignInForm = () => {
     const emailError = document.getElementById("emailError");
     const passwordError = document.getElementById("passwordError");
 
+    // Envoi de la date avec axios à l'adresse prédéfinis au back, message d'erreur en cas d'erreur sinon ça nous redirige
     axios({
       method: "POST",
       url: `${process.env.REACT_APP_API_URL}api/user/login`,

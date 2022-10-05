@@ -1,3 +1,4 @@
+// Middleware basique de multer qu'on vient par la suite appliquer sur nos différentes routes
 const multer = require("multer");
 
 const MIME_TYPES = {
