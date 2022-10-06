@@ -78,6 +78,24 @@ import LikeButton from "./likeButton";
             alt="card-pic"
           />
         )}
+        {isUpdated === true && (
+          <>
+            <div className="flex flex-col w-full justify-end items-center gap-4 p-2">
+              <input
+                className="file:bg-secondary file:rounded-xl file:border-none"
+                type="file"
+                id="file-upload"
+                name="image"
+                accept=".jpg, .jpeg, .png, .gif"
+              />
+              <button
+                className="bg-secondary px-2 py-1 rounded-xl"
+              >
+                Modifier la photo
+              </button>
+            </div>
+          </>
+        )}
 
         <div className="flex justify-between gap-4 mt-2">
           <LikeButton post={post} />
