@@ -61,6 +61,15 @@ import LikeButton from "./likeButton";
               defaultValue={post.message}
               onChange={(e) => setTextUpdate(e.target.value)}
             />
+            <div className="flex flex-col w-full gap-4 p-2">
+              <input
+                className="file:bg-secondary file:rounded-xl file:border-none"
+                type="file"
+                id="file-upload"
+                name="image"
+                accept=".jpg, .jpeg, .png, .gif"
+              />
+            </div>
             <div>
               <button
                 className="bg-secondary px-2 py-1 rounded-xl"
@@ -80,20 +89,7 @@ import LikeButton from "./likeButton";
         )}
         {isUpdated === true && (
           <>
-            <div className="flex flex-col w-full justify-end items-center gap-4 p-2">
-              <input
-                className="file:bg-secondary file:rounded-xl file:border-none"
-                type="file"
-                id="file-upload"
-                name="image"
-                accept=".jpg, .jpeg, .png, .gif"
-              />
-              <button
-                className="bg-secondary px-2 py-1 rounded-xl"
-              >
-                Modifier la photo
-              </button>
-            </div>
+            
           </>
         )}
 

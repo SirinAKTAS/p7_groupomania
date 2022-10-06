@@ -34,22 +34,45 @@ exports.createPost = async (req, res, next) => {
 
 // Modification d'un Post
 exports.modifyPost = (req, res, next) => {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-
-  const updatedRecord = {
-    message: req.body.message,
-  };
-
-  PostModel.findByIdAndUpdate(
-    req.params.id,
-    { $set: updatedRecord },
-    { new: true },
-    (err, docs) => {
-      if (!err) res.send(docs);
-      else console.log("Update error : " + err);
+  PostModel.findOne({ _id: req.params.id }).then((post) => {
+    if (req.file) {
+      const data = post.pictureUrl.split("images/")[1];
+      fs.unlink(`images/${data}`, () => {
+        PostModel.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            ...req.body,
+            pictureUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+          }
+        )
+          .then(() =>
+            res
+              .status(200)
+              .json({ message: "Publication avec image modifiée !" })
+          )
+          .catch(() =>
+            res.status(400).json({
+              error: "Impossible de modifier la piblication avec son image !",
+            })
+          );
+      });
+    } else {
+      PostModel.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          ...req.body,
+          message: req.body.message,
+        }
+      )
+        .then(() => res.status(200).json({ message: "Publication modifiée" }))
+        .catch(() =>
+          res
+            .status(400)
+            .json({ error: "Impossible de modifier la publication !" })
+        );
     }
-  );
+  });
+ 
 };
 
 // Suppression d'un Post
