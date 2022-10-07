@@ -64,7 +64,8 @@ export default function NewFormPost() {
           </div>
         ) : null}
       </div>
-      <div className="flex flex-row w-full justify-end items-center gap-4 p-2">
+      <div className="flex flex-col md:flex-row w-full justify-end items-center gap-4 p-2">
+        <label htmlFor="image" className="flex flex-col md:flex-row gap-2">Ajouter une image/gif
         <input
           className="file:bg-secondary file:rounded-xl file:border-none"
           type="file"
@@ -73,6 +74,7 @@ export default function NewFormPost() {
           accept=".jpg, .jpeg, .png, .gif, .webp"
           onChange={(e) => handlePicture(e)}
         />
+        </label>
         <button
           className="bg-secondary px-2 py-1 rounded-xl"
           onClick={handlePost}

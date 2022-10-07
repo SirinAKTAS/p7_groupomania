@@ -21,26 +21,26 @@ export default function FeedPage() {
 
   return (
     <>
-      <header className="bg-white w-full">
+      <header className="bg-primary w-full">
         <div className="flex justify-between flex-col items-center p-2 md:flex-row">
           <img
-            className="h-20 w-full object-cover-fit md:h-full md:w-48 "
+            className="h-16 w-auto object-cover-fit md:h-full md:w-48 rounded-2xl "
             src="../images/logoAvecNom.jpg"
             alt="Logo groupomania"
           />
           <nav>
-            <ul className="flex pt-6 gap-16 md:pt-0">
+            <ul className="flex pt-6 gap-12 md:pt-0">
               <li
                 onClick={handleModals}
                 id="home"
-                className={feedFormModal ? "text-primary cursor-pointer" : "text-secondary cursor-pointer"}
+                className={feedFormModal ? "text-white text-xl font-bold cursor-pointer" : "text-tertiary text-xl cursor-pointer"}
               >
                 Acceuil
               </li>
               <li
                 onClick={handleModals}
                 id="profil"
-                className={profilFormModal ? "text-primary cursor-pointer" : "text-secondary cursor-pointer"}
+                className={profilFormModal ? "text-white text-xl font-bold cursor-pointer" : "text-tertiary text-xl cursor-pointer"}
               >
                 Profil
               </li>

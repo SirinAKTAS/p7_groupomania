@@ -23,7 +23,7 @@ const Logout = () => {
     };
 
     return(
-        <li onClick={logout} className="text-secondary cursor-pointer">
+        <li onClick={logout} className="text-tertiary text-xl cursor-pointer">
             Se déconnecter
         </li>
     );
