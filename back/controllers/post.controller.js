@@ -72,7 +72,6 @@ exports.modifyPost = (req, res, next) => {
         );
     }
   });
- 
 };
 
 // Suppression d'un Post

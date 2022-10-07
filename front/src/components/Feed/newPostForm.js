@@ -70,7 +70,7 @@ export default function NewFormPost() {
           type="file"
           id="file-upload"
           name="image"
-          accept=".jpg, .jpeg, .png, .gif"
+          accept=".jpg, .jpeg, .png, .gif, .webp"
           onChange={(e) => handlePicture(e)}
         />
         <button

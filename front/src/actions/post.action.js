@@ -56,15 +56,15 @@ export const unlikePost = (postId, userId) => {
   };
 };
 
-export const updatePost = (postId, message) => {
+export const updatePost = (postId, message, pictureUrl) => {
   return (dispatch) => {
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
-      data: { message },
+      data: { message, pictureUrl },
     })
       .then((res) => {
-        dispatch({ type: UPDATE_POST, payload: { message, postId } });
+        dispatch({ type: UPDATE_POST, payload: { message, postId, pictureUrl } });
       })
       .catch((err) => console.log(err));
   };

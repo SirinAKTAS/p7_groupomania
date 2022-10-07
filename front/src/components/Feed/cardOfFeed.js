@@ -12,14 +12,17 @@ import LikeButton from "./likeButton";
  */
   const Card = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
-  const [textUpdate, setTextUpdate] = useState(null);
+  const [textUpdate, setTextUpdate] = useState(post.message);
+  const [file, setFile] = useState(post.pictureUrl);
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const updateItem = async () => {
-    if (textUpdate) {
-      dispatch(updatePost(post._id, textUpdate));
+    if ((textUpdate && file) ||
+        (textUpdate && !file) ||
+        (!textUpdate && file)) {
+      dispatch(updatePost(post._id, textUpdate, file));
     }
     setIsUpdated(false);
   };
@@ -66,8 +69,9 @@ import LikeButton from "./likeButton";
                 className="file:bg-secondary file:rounded-xl file:border-none"
                 type="file"
                 id="file-upload"
-                name="image"
-                accept=".jpg, .jpeg, .png, .gif"
+                name="file"
+                accept=".jpg, .jpeg, .png, .gif, .webp"
+                onChange={(e) => setFile(URL.createObjectURL(e.target.files[0]))}
               />
             </div>
             <div>
