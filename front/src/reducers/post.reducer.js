@@ -44,7 +44,7 @@ export default function postReducer(state = initialState, action) {
       const payload = {...post}
       if (post._id === action.payload.postId) {
         if (action.payload.message) payload.message = action.payload.message
-        if (action.payload.pictureUrl) payload.pictureUrl = action.payload.pictureUrl
+        //if (action.payload.pictureUrl) payload.pictureUrl = action.payload.pictureUrl
       } return payload
      })
     case DELETE_POST:

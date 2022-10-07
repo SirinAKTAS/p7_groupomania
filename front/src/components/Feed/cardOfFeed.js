@@ -13,16 +13,14 @@ import LikeButton from "./likeButton";
   const Card = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(post.message);
-  const [file, setFile] = useState(post.pictureUrl);
+  //const [file, setFile] = useState(post.pictureUrl);
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const updateItem = async () => {
-    if ((textUpdate && file) ||
-        (textUpdate && !file) ||
-        (!textUpdate && file)) {
-      dispatch(updatePost(post._id, textUpdate, file));
+    if (textUpdate) {
+      dispatch(updatePost(post._id, textUpdate));
     }
     setIsUpdated(false);
   };
@@ -64,16 +62,18 @@ import LikeButton from "./likeButton";
               defaultValue={post.message}
               onChange={(e) => setTextUpdate(e.target.value)}
             />
-            <div className="flex flex-col w-full gap-4 p-2">
-              <input
-                className="file:bg-secondary file:rounded-xl file:border-none"
-                type="file"
-                id="file-upload"
-                name="file"
-                accept=".jpg, .jpeg, .png, .gif, .webp"
-                onChange={(e) => setFile(URL.createObjectURL(e.target.files[0]))}
-              />
-            </div>
+   {
+     //       <div className="flex flex-col w-full gap-4 p-2">
+     //         input
+     //           className="file:bg-secondary file:rounded-xl file:border-none"
+     //           type="file"
+     //           id="file-upload"
+     //           name="file"
+     //           accept=".jpg, .jpeg, .png, .gif, .webp"
+     //           onChange={(e) => setFile(URL.createObjectURL(e.target.files[0]))}
+     //         />
+     //       </div>
+    }          
             <div>
               <button
                 className="bg-secondary px-2 py-1 rounded-xl"
@@ -90,11 +90,6 @@ import LikeButton from "./likeButton";
             src={post.pictureUrl}
             alt="card-pic"
           />
-        )}
-        {isUpdated === true && (
-          <>
-            
-          </>
         )}
 
         <div className="flex justify-between gap-4 mt-2">

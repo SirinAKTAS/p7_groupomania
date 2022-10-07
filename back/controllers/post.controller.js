@@ -21,7 +21,6 @@ exports.createPost = async (req, res, next) => {
         ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
         : "",
     likers: [],
-    comments: [],
   });
 
   try {
