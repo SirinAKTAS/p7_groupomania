@@ -14,8 +14,6 @@ const { signUpErrors, signInErrors } = require("../utils/errors.utils");
 // ************************************************ AUTH *********************************************************************
 
 /**
- * Crypter le mot de passe 10x pour la sécurité du champ
- * Hashage du mot de passe
  * Ajout de l'utilisateur dans la BDD après la création du compte
  */
 exports.signup = async (req, res, next) => {
