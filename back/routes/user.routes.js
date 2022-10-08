@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("../middleware/multer.middleware");
 const userCtrl = require("../controllers/user.controller");
 
 // Routes d'authentification 
@@ -11,6 +10,6 @@ router.get("/logout", userCtrl.logout);
 // Routes d'user
 router.get("/", userCtrl.getAllUsers);
 router.get("/:id", userCtrl.getOneUser);
-router.put("/:id", multer, userCtrl.modifyUser);
+router.put("/:id", userCtrl.modifyUser);
 
 module.exports = router;
