@@ -21,10 +21,10 @@ export default function FeedAdmin() {
 
   return (
     <>
-      <header className="bg-white w-full">
+      <header className="bg-primary w-full">
         <div className="flex justify-between flex-col items-center p-2 md:flex-row">
           <img
-            className="h-20 w-full object-cover-fit md:h-full md:w-48 "
+            className="h-16 w-auto object-cover-fit md:h-full md:w-48 rounded-2xl "
             src="../images/logoAvecNom.jpg"
             alt="Logo groupomania"
           />
